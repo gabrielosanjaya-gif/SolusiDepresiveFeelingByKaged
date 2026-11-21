@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memahami Depressive Feeling</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #e8faff;
+        color: #16445b;
+      }
+
+      .navbar {
+        background: #006d8f;
+      }
+
+      .navbar-brand,
+      .nav-link {
+        color: white !important;
+        font-weight: bold;
+      }
+
+      .hero {
+        min-height: 480px;
+        background: linear-gradient(180deg, #006d9c, #38b9d2, #b9edf2);
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        font-weight: bold;
+      }
+
+      .hero .container {
+        position: relative;
+        z-index: 5;
+      }
+
+      section {
+        padding: 65px 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        color: #006d8f;
+        font-weight: bold;
+        margin-bottom: 35px;
+      }
+
+      .card {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .feeling-card {
+        cursor: pointer;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .emoji {
+        font-size: 48px;
+      }
+
+      .btn-ocean {
+        background: #008db5;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 22px;
+      }
+
+      .btn-ocean:hover {
+        background: #005f7d;
+        color: white;
+      }
+
+      .result-box {
+        background: white;
+        border-radius: 18px;
+        padding: 25px;
+        margin-top: 25px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      }
+
+      .result-box li {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .factor-card {
+        background: #d4f5f7;
+        padding: 25px;
+        border-radius: 15px;
+        height: 100%;
+      }
+
+      .contact {
+        background: linear-gradient(135deg, #007b9e, #49c6d5);
+        color: white;
+        border-radius: 20px;
+        padding: 35px;
+      }
+
+      /* =========================
+   IKAN KOI
+========================= */
+
+      .koi {
+        position: absolute;
+        z-index: 2;
+        font-size: 75px;
+        filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
+        pointer-events: none;
+      }
+
+      .koi1 {
+        top: 70px;
+        left: -150px;
+        animation: koiSwim1 18s linear infinite;
+      }
+
+      .koi2 {
+        top: 250px;
+        left: -150px;
+        animation: koiSwim2 22s linear infinite;
+        animation-delay: 5s;
+      }
+
+      @keyframes koiSwim1 {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(120vw);
+        }
+      }
+
+      @keyframes koiSwim2 {
+        from {
+          transform: translateX(0) scaleX(-1);
+        }
+        to {
+          transform: translateX(120vw) scaleX(-1);
+        }
+      }
+
+      /* =========================
+   IKAN KECIL
+========================= */
+
+      .small-fish {
+        position: absolute;
+        font-size: 35px;
+        z-index: 2;
+        pointer-events: none;
+        animation: smallFishSwim 15s linear infinite;
+      }
+
+      @keyframes smallFishSwim {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(120vw);
+        }
+      }
+
+      /* =========================
+   GELEMBUNG
+========================= */
+
+      .bubble {
+        position: absolute;
+        bottom: -40px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: bubbleUp 10s infinite ease-in;
+        z-index: 1;
+      }
+
+      .bubble1 {
+        width: 20px;
+        height: 20px;
+        left: 10%;
+      }
+
+      .bubble2 {
+        width: 14px;
+        height: 14px;
+        left: 25%;
+        animation-delay: 2s;
+      }
+
+      .bubble3 {
+        width: 25px;
+        height: 25px;
+        left: 50%;
+        animation-delay: 4s;
+      }
+
+      .bubble4 {
+        width: 18px;
+        height: 18px;
+        left: 75%;
+        animation-delay: 3s;
+      }
+
+      .bubble5 {
+        width: 12px;
+        height: 12px;
+        left: 90%;
+        animation-delay: 6s;
+      }
+
+      @keyframes bubbleUp {
+        0% {
+          transform: translateY(0);
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-600px);
+          opacity: 0;
+        }
+      }
+
+      /* =========================
+   TERUMBU KARANG
+========================= */
+
+      .coral {
+        position: absolute;
+        bottom: 0;
+        font-size: 70px;
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .coral-left {
+        left: 5px;
+      }
+
+      .coral-right {
+        right: 5px;
+      }
+
+      /* =========================
+   RUMPUT LAUT
+========================= */
+
+      .seaweed {
+        position: absolute;
+        bottom: 0;
+        font-size: 55px;
+        transform-origin: bottom;
+        animation: seaweedMove 3s ease-in-out infinite alternate;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      @keyframes seaweedMove {
+        from {
+          transform: rotate(-8deg);
+        }
+        to {
+          transform: rotate(8deg);
+        }
+      }
+
+      /* =========================
+   PASIR BAWAH LAUT
+========================= */
+
+      .sea-floor {
+        height: 110px;
+        position: relative;
+        margin-top: -5px;
+        background: linear-gradient(180deg, #e9d28c, #d7b56c, #c9a45a);
+        overflow: hidden;
+      }
+
+      .sea-floor::before {
+        content: "🐚     🪨     🐚     🪸     🐚     🪨     🐚";
+        position: absolute;
+        top: 25px;
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+      }
+
+      /* =========================
+   FOOTER
+========================= */
+
+      footer {
+        background: linear-gradient(180deg, #005b78, #003c55);
+        color: white;
+        text-align: center;
+        padding: 45px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* DEKORASI BAGIAN BAWAH */
+
+      .footer-fish {
+        font-size: 30px;
+        animation: smallFishSwim 14s linear infinite;
+        position: absolute;
+        top: 20px;
+        left: -100px;
+      }
+
+      #hasilLangkah {
+        scroll-margin-top: 100px;
+      }
+
+      @media (max-width: 600px) {
+        .hero h1 {
+          font-size: 30px;
+        }
+
+        .koi {
+          font-size: 50px;
+        }
+
+        .coral {
+          font-size: 45px;
+        }
+
+        .seaweed {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#"> 🌊 Memahami Perasaan </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#beranda">Beranda</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#perasaan">Perasaan</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#faktor">Faktor</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#bantuan">Bantuan</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =========================
+     BERANDA / HERO
+========================= -->
+
+    <header class="hero" id="beranda">
+      <!-- IKAN KOI -->
+      <div class="koi koi1">🐠</div>
+      <div class="koi koi2">🐟</div>
+
+      <!-- IKAN KECIL -->
+      <div class="small-fish" style="top: 30%; left: -10%">🐡</div>
+
+      <div class="small-fish" style="top: 75%; left: -10%; animation-delay: 5s">
+        🐟
+      </div>
+
+      <!-- GELEMBUNG -->
+      <div class="bubble bubble1"></div>
+      <div class="bubble bubble2"></div>
+      <div class="bubble bubble3"></div>
+      <div class="bubble bubble4"></div>
+      <div class="bubble bubble5"></div>
+
+      <!-- TERUMBU KARANG -->
+      <div class="coral coral-left">🪸</div>
+      <div class="coral coral-right">🪸</div>
+
+      <!-- RUMPUT LAUT -->
+      <div class="seaweed" style="left: 15%">🌿</div>
+      <div class="seaweed" style="left: 85%">🌿</div>
+
+      <div class="container">
+        <h1>MEMAHAMI DEPRESSIVE FEELING</h1>
+
+        <h5 class="mt-3">BUKAN SEKADAR SEDIH BIASA</h5>
+
+        <p class="mt-4">
+          Kenali perasaanmu, pahami kondisimu, dan temukan langkah kecil untuk
+          menjaga kesehatan mental.
+        </p>
+
+        <a href="#perasaan" class="btn btn-light mt-3"> Kenali Perasaanmu </a>
+      </div>
+    </header>
+
+    <!-- PASIR -->
+    <div class="sea-floor"></div>
+
+    <!-- =========================
+     PILIH PERASAAN
+========================= -->
+
+    <section id="perasaan" class="container">
+      <h2 class="section-title">Apa yang Sedang Kamu Rasakan?</h2>
+
+      <p class="text-center mb-4">
+        Pilih salah satu kondisi yang paling menggambarkan perasaanmu saat ini.
+      </p>
+
+      <div class="row g-4">
+        <!-- SEDIH -->
+        <div class="col-md-3 col-6">
+          <div
+            class="card feeling-card h-100"
+            onclick="tampilkanLangkah('sedih')"
+          >
+            <div class="emoji">😢</div>
+
+            <h5>Sedih Terus-Menerus</h5>
+
+            <p>Merasa sedih dalam waktu yang lama.</p>
+
+            <button class="btn btn-ocean">Pilih</button>
+          </div>
+        </div>
+
+        <!-- PUTUS ASA -->
+        <div class="col-md-3 col-6">
+          <div
+            class="card feeling-card h-100"
+            onclick="tampilkanLangkah('putusAsa')"
+          >
+            <div class="emoji">😔</div>
+
+            <h5>Putus Asa</h5>
+
+            <p>Merasa kehilangan harapan dan semangat.</p>
+
+            <button class="btn btn-ocean">Pilih</button>
+          </div>
+        </div>
+
+        <!-- KEHILANGAN MINAT -->
+        <div class="col-md-3 col-6">
+          <div
+            class="card feeling-card h-100"
+            onclick="tampilkanLangkah('kehilanganMinat')"
+          >
+            <div class="emoji">😶</div>
+
+            <h5>Kehilangan Minat</h5>
+
+            <p>Tidak tertarik melakukan kegiatan yang disukai.</p>
+
+            <button class="btn btn-ocean">Pilih</button>
+          </div>
+        </div>
+
+        <!-- CEMAS -->
+        <div class="col-md-3 col-6">
+          <div
+            class="card feeling-card h-100"
+            onclick="tampilkanLangkah('cemas')"
+          >
+            <div class="emoji">😟</div>
+
+            <h5>Kecemasan Berlebihan</h5>
+
+            <p>Sering merasa takut dan khawatir berlebihan.</p>
+
+            <button class="btn btn-ocean">Pilih</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HASIL LANGKAH -->
+      <div id="hasilLangkah" class="result-box" style="display: none">
+        <h3 id="judulMasalah" class="text-primary"></h3>
+
+        <p id="deskripsiMasalah"></p>
+
+        <h5 class="mt-4">Langkah yang Bisa Dicoba:</h5>
+
+        <ol id="daftarLangkah"></ol>
+
+        <h5 class="mt-4">Pilih Tingkat Kondisimu:</h5>
+
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-success" onclick="changeLevel('Ringan')">
+            Ringan
+          </button>
+
+          <button class="btn btn-warning" onclick="changeLevel('Sedang')">
+            Sedang
+          </button>
+
+          <button class="btn btn-danger" onclick="changeLevel('Berat')">
+            Berat
+          </button>
+        </div>
+
+        <div id="hasilLevel" class="mt-3"></div>
+
+        <button class="btn btn-secondary mt-3" onclick="tutupHasil()">
+          Tutup
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================
+     FAKTOR PENYEBAB
+========================= -->
+
+    <section id="faktor" style="background: #d8f5f7">
+      <div class="container">
+        <h2 class="section-title">Faktor yang Memengaruhi Perasaan</h2>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="factor-card">
+              <h4>📚 Tekanan Hidup</h4>
+
+              <p>
+                Tuntutan sekolah, pekerjaan, dan masalah kehidupan sehari-hari
+                dapat memengaruhi kondisi emosional.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="factor-card">
+              <h4>💔 Masalah Hubungan</h4>
+
+              <p>
+                Konflik dengan keluarga, teman, atau pasangan dapat menimbulkan
+                tekanan emosional.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="factor-card">
+              <h4>🌧️ Kehilangan atau Kegagalan</h4>
+
+              <p>
+                Pengalaman kehilangan dan kegagalan dapat memengaruhi
+                kepercayaan diri serta suasana hati.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+     MENJAGA KESEHATAN MENTAL
+========================= -->
+
+    <section class="container">
+      <h2 class="section-title">Cara Menjaga Kesehatan Mental 🌱</h2>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card p-4 h-100">
+            <h5>🗣️ Berbagi Cerita</h5>
+
+            <p>
+              Jangan memendam semua masalah sendirian. Ceritakan kepada orang
+              yang kamu percaya.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card p-4 h-100">
+            <h5>😴 Istirahat yang Cukup</h5>
+
+            <p>
+              Atur waktu tidur dan berikan tubuh kesempatan untuk beristirahat.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card p-4 h-100">
+            <h5>🚶 Aktivitas Fisik</h5>
+
+            <p>
+              Lakukan olahraga ringan atau berjalan kaki untuk menjaga
+              kebugaran.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card p-4 h-100">
+            <h5>🎨 Lakukan Hobi</h5>
+
+            <p>
+              Luangkan waktu untuk melakukan kegiatan yang membuatmu nyaman.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+     BANTUAN
+========================= -->
+
+    <section id="bantuan" class="container">
+      <div class="contact text-center">
+        <h2>💙 Kamu Tidak Sendirian</h2>
+
+        <p class="mt-3">
+          Jika perasaan yang kamu alami terus berlanjut atau mengganggu
+          aktivitas sehari-hari, jangan ragu mencari bantuan.
+        </p>
+
+        <p>
+          Kamu dapat menghubungi orang tua, guru BK, konselor, psikolog, atau
+          tenaga kesehatan.
+        </p>
+
+        <a
+          href="https://wa.me/6281225466938"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-light mt-3"
+        >
+          Hubungi Bantuan melalui WhatsApp
+        </a>
+
+        <p class="mt-3 small">Kontak bantuan: Vivi Nur Hasanah, S.P.</p>
+      </div>
+
+      <p class="text-center mt-4">
+        <strong>Catatan:</strong>
+        Website ini bertujuan memberikan edukasi dan dukungan awal, bukan untuk
+        mendiagnosis atau menggantikan bantuan profesional. Jika kamu merasa
+        tidak aman atau ingin menyakiti diri, segera hubungi orang dewasa
+        tepercaya dan tenaga kesehatan atau datangi IGD terdekat.
+      </p>
+    </section>
+
+    <!-- =========================
+     FOOTER
+========================= -->
+
+    <footer>
+      <!-- IKAN -->
+      <div class="footer-fish">🐠</div>
+
+      <!-- TERUMBU KARANG -->
+      <div class="coral coral-left">🪸</div>
+      <div class="coral coral-right">🪸</div>
+
+      <!-- RUMPUT LAUT -->
+      <div class="seaweed" style="left: 20%">🌿</div>
+      <div class="seaweed" style="left: 75%">🌿</div>
+
+      <h5>🌊 MEMAHAMI PERASAAN 💙</h5>
+
+      <p>Jaga dirimu, hargai perasaanmu, dan jangan takut meminta bantuan.</p>
+
+      <p>🐠 🐬 🐢 🐙 🐟 🦀</p>
+
+      <small> © 2026 Edukasi Kesehatan Mental By Kaged </small>
+    </footer>
+
+    <!-- PASIR FOOTER -->
+    <div class="sea-floor"></div>
+
+    <!-- =========================
+     JAVASCRIPT
+========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // DATA LANGKAH SETIAP MASALAH
+
+      const langkahMasalah = {
+        sedih: {
+          judul: "😢 Sedih Terus-Menerus",
+
+          deskripsi:
+            "Kesedihan yang berlangsung lama dapat memengaruhi aktivitas sehari-hari. Berikut beberapa langkah awal yang bisa dicoba:",
+
+          langkah: [
+            "Cari tahu hal yang menyebabkan kesedihan.",
+            "Ceritakan perasaan kepada orang yang dipercaya.",
+            "Luangkan waktu untuk melakukan aktivitas yang disukai.",
+            "Tuliskan perasaan dalam buku harian.",
+            "Jaga pola tidur dan makan secara teratur.",
+            "Jika kesedihan berlangsung lama, mintalah bantuan guru BK atau tenaga profesional.",
+          ],
+        },
+
+        putusAsa: {
+          judul: "😔 Putus Asa",
+
+          deskripsi:
+            "Ketika merasa kehilangan harapan, cobalah menghadapi masalah secara perlahan dan jangan memaksakan diri.",
+
+          langkah: [
+            "Berhenti sejenak dan tenangkan pikiran.",
+            "Jangan memaksakan diri menyelesaikan semua masalah sekaligus.",
+            "Bagi masalah besar menjadi beberapa langkah kecil.",
+            "Ingat kembali hal-hal yang pernah berhasil kamu capai.",
+            "Buat target sederhana yang bisa dilakukan hari ini.",
+            "Bicarakan masalah dengan keluarga, teman, atau konselor.",
+          ],
+        },
+
+        kehilanganMinat: {
+          judul: "😶 Kehilangan Minat",
+
+          deskripsi:
+            "Kehilangan minat terhadap kegiatan yang sebelumnya disukai dapat menjadi tanda bahwa kamu membutuhkan perhatian dan dukungan.",
+
+          langkah: [
+            "Mulailah melakukan aktivitas ringan selama 5–10 menit.",
+            "Coba kembali hobi yang dahulu kamu sukai.",
+            "Buat jadwal kegiatan sederhana setiap hari.",
+            "Lakukan aktivitas fisik ringan seperti berjalan kaki.",
+            "Ajak teman atau keluarga melakukan kegiatan bersama.",
+            "Jika kondisi terus berlanjut, konsultasikan kepada tenaga profesional.",
+          ],
+        },
+
+        cemas: {
+          judul: "😟 Kecemasan Berlebihan",
+
+          deskripsi:
+            "Kecemasan dapat membuat pikiran sulit tenang. Cobalah beberapa langkah berikut untuk mengelolanya.",
+
+          langkah: [
+            "Tarik napas perlahan selama 4 detik.",
+            "Tahan napas selama 2 detik, kemudian embuskan selama 6 detik.",
+            "Ulangi latihan pernapasan beberapa kali jika terasa nyaman.",
+            "Tuliskan hal yang membuatmu cemas.",
+            "Pisahkan fakta dengan hal-hal yang hanya kamu khawatirkan.",
+            "Kurangi kafein dan mintalah bantuan profesional jika kecemasan mengganggu aktivitas.",
+          ],
+        },
+      };
+
+      // MENAMPILKAN LANGKAH
+
+      function tampilkanLangkah(jenis) {
+        const data = langkahMasalah[jenis];
+
+        document.getElementById("hasilLangkah").style.display = "block";
+
+        document.getElementById("judulMasalah").innerText = data.judul;
+
+        document.getElementById("deskripsiMasalah").innerText = data.deskripsi;
+
+        const daftar = document.getElementById("daftarLangkah");
+
+        daftar.innerHTML = "";
+
+        data.langkah.forEach(function (langkah) {
+          const item = document.createElement("li");
+
+          item.innerText = langkah;
+
+          daftar.appendChild(item);
+        });
+
+        document.getElementById("hasilLevel").innerHTML = "";
+
+        document.getElementById("hasilLangkah").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      // SARAN BERDASARKAN TINGKAT KONDISI
+
+      function changeLevel(level) {
+        const hasil = document.getElementById("hasilLevel");
+
+        let pesan = "";
+
+        if (level === "Ringan") {
+          pesan = `
+        <div class="alert alert-success">
+        <strong>Kondisi Ringan</strong><br>
+        Cobalah melakukan langkah-langkah di atas,
+        menjaga rutinitas, dan berbagi cerita dengan
+        orang yang kamu percaya. Pantau bagaimana
+        perasaanmu.
+        </div>
+        `;
+        } else if (level === "Sedang") {
+          pesan = `
+        <div class="alert alert-warning">
+        <strong>Kondisi Sedang</strong><br>
+        Jangan menghadapi masalah sendirian.
+        Ceritakan kondisimu kepada keluarga,
+        guru BK, atau konselor. Pertimbangkan
+        untuk berkonsultasi dengan psikolog
+        atau tenaga kesehatan.
+        </div>
+        `;
+        } else if (level === "Berat") {
+          pesan = `
+        <div class="alert alert-danger">
+        <strong>Membutuhkan Bantuan Segera</strong><br>
+        Segera hubungi orang dewasa yang dipercaya
+        dan tenaga kesehatan profesional.
+        Jika kamu merasa tidak aman atau berisiko
+        menyakiti diri, jangan sendirian dan
+        datangi IGD terdekat.
+        </div>
+        `;
+        }
+
+        hasil.innerHTML = pesan;
+      }
+
+      // MENUTUP HASIL
+
+      function tutupHasil() {
+        document.getElementById("hasilLangkah").style.display = "none";
+
+        document.getElementById("hasilLevel").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
